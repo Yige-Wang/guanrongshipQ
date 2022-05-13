@@ -1,0 +1,70 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarBackgroundColor": "#dda3c7",
+				"enablePullDownRefresh": false,
+				"usingComponenets": {},
+				"app-plus": {
+					"softinputNavBar": "none",
+					"softinputMode": "adjustResize"
+				}
+			}
+
+		},
+		{
+			"path": "pages/test/test"
+		},
+		{
+			"path": "pages/index/index"
+			
+		},
+		{
+			"path": "pages/shipDynamics/shipDynamics"
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#bfbfbf",
+		"selectedColor": "#5785cb",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "船舶动态",
+				"iconPath": "./static/logo.png",
+				"selectedIconPath": "static/logo.png"
+			},
+			{
+				"pagePath": "pages/test/test",
+				"text": "船舶基本信息",
+				"iconPath": "./static/logo.png",
+				"selectedIconPath": "static/logo.png"
+			}
+
+		]
+	},
+	"condition": {
+		"current": 0,
+		"list": [{
+			"name": "test",
+			"path": "pages/index/index"
+		}]
+	},
+	// 下载安装时配置
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"fui-(.*)": "@/components/firstui/fui-$1/fui-$1.vue"
+		}
+	}
+
+
+}
