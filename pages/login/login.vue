@@ -1,6 +1,6 @@
 <template>
 	
-	<view class="img">
+	<view class="img" style="width: 100%;height: 100%;opacity: 0.4;z-index: -1;">
 		<form v-model="form">
 			<view class="u-input">
 				<view class="username">
@@ -17,7 +17,6 @@
 			</view>
 		</form>
 	</view>
-
 </template>
 
 <script>
@@ -95,6 +94,11 @@
 		background-image: url(../../static/login.jpg);
 		height: 100%;
 		width: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		position: fixed;
 	}
 
 	.title {

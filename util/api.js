@@ -6,3 +6,7 @@ export function login(params) {
 export function shipDynamicsList(params){
 	return request("shipDynamics/list","GET",params);
 }
+
+export function shipDynamicsfindById(params){
+	return request("shipDynamics/findById","GET",params);
+}
