@@ -1,5 +1,4 @@
 <template>
-
 	<page-meta>
 		<navigation-bar title="冠荣船舶信息管理" title-icon="/static/logo.png" title-icon-radius="20px" subtitle-color="#000000"
 			front-color="#000000" background-color="#ffffff" color-animation-timing-func="easeIn" title-align="auto" />

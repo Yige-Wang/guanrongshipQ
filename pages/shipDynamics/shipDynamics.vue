@@ -16,9 +16,7 @@
 				<input class="uni-input" v-model="form.hangxian" />
 			</view>
 			<view class="text">业务类型</view>
-					<uni-data-select :clear="true" v-model="form.businessType" :localdata="businessType"></uni-data-select>
-			
-			<!-- </view> -->
+			<uni-data-select :clear="true" v-model="form.businessType" :localdata="businessType"></uni-data-select>
 			<view class="username">
 				<view class="title">吨位</view>
 				<input class="uni-input" v-model="form.tonnage" />
@@ -31,10 +29,8 @@
 				<view class="title">航次</view>
 				<input class="uni-input" v-model="form.voyageNumber" />
 			</view>
-			<view class="username">
-				<view class="title">航向</view>
-				<input class="uni-input" v-model="form.course" />
-			</view>
+			<view class="text">航向</view>
+			<uni-data-select :clear="true" v-model="form.course" :localdata="course"></uni-data-select>
 			<view class="username">
 				<view class="title">主机平均转速</view>
 				<input class="uni-input" v-model="form.averageSpeed" />
@@ -51,13 +47,13 @@
 				<view class="title">早上9点船位</view>
 				<input class="uni-input" v-model="form.morningBerth" />
 			</view>
-			<view class="username">
 				<view class="title">发航时间</view>
-				<input class="uni-input" v-model="form.departureTime" />
+			<view class="example-body">
+				<uni-datetime-picker type="datetime" v-model="form.departureTime" />
 			</view>
-			<view class="username">
 				<view class="title">抵港时间</view>
-				<input class="uni-input" v-model="form.departureTime" />
+			<view class="example-body">
+				<uni-datetime-picker type="datetime" v-model="form.arriveTime" />
 			</view>
 			<view class="username">
 				<view class="title">24小时油耗</view>
@@ -116,6 +112,15 @@
 					{
 						value: 4,
 						text: '商品滚装'
+					}
+				],
+				course: [{
+						value: 1,
+						text: '上水'
+					},
+					{
+						value: 2,
+						text: '下水'
 					}
 				]
 			}
@@ -198,6 +203,7 @@
 	.title {
 		font-size: 18px;
 		font-weight: bolder;
+		color: #e59ea5;
 	}
 
 	.uni-input {
@@ -205,24 +211,33 @@
 	}
 
 	.button-hover {
-		margin: 0 auto;
+		margin: auto;
 		width: 60%;
+		margin-top: 4%;
 	}
+
 	.selector {
 		margin-right: 0%;
 		width: 340px;
 	}
+
 	.text {
 		font-size: 18px;
 		font-weight: bolder;
 		margin-top: 3%;
+		color: #e59ea5;
 	}
+
 	::v-deep .uni-select__input-text {
-	    width: 350px;
-	    color: #333;
-	    white-space: nowrap;
-	    text-overflow: ellipsis;
-	    -o-text-overflow: ellipsis;
-	    overflow: hidden;
+		width: 350px;
+		color: #333;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
+		overflow: hidden;
+		border: none;
+	}
+	.example-body {
+		margin-top: 3%;
 	}
 </style>

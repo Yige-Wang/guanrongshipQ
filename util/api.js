@@ -13,3 +13,6 @@ export function shipDynamicsfindById(params){
 export function shipDynamicsUpdate(params){
 	return request("shipDynamics/update","POST",params);
 }
+export function shipDynamicsAdd(params){
+	return request("shipDynamics/create","POST",params);
+}
