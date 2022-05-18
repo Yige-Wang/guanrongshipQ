@@ -6,13 +6,11 @@
 	</page-meta>
 	<view class="all">
 		<view class="u-input">
-			<view class="username">
-				<view class="title">船舶名称</view>
-				<input class="uni-input" v-model="form.shipName" />
-			</view>
+			<view class="text">船舶名称</view>
+			<uni-data-select :clear="true" v-model="form.shipId" :localdata="shipName"></uni-data-select>
 			<view class="username">
 				<view class="title">航线</view>
-				<input class="uni-input" v-model="form.hangxian" />
+				<input class="uni-input" v-model="form.airway" />
 			</view>
 			<view class="text">业务类型</view>
 			<uni-data-select :clear="true" v-model="form.businessType" :localdata="businessType"></uni-data-select>
@@ -71,7 +69,8 @@
 
 <script>
 	import {
-		shipDynamicsAdd
+		shipDynamicsAdd,
+		shipBasicInformationAll
 	}
 	from '@/util/api.js'
 	export default {
@@ -79,11 +78,10 @@
 			return {
 				form: {
 					id: null,
-					shipName: '',
+					airway: '',
 					businessType: null,
 					voyageNumber: '',
 					course: null,
-					hangxian: "",
 					morningBerth: '',
 					afternoonBerth: '',
 					departureTime: '',
@@ -121,7 +119,8 @@
 						value: 2,
 						text: '下水'
 					}
-				]
+				],
+				shipName:[]
 			}
 		},
 		methods: {
@@ -151,7 +150,32 @@
 						departureTime: 2000
 					})
 				}
+			},
+			async shipBasicInformationAll1() {
+				const {
+					data,
+					code,
+					message,
+					success
+				} = await shipBasicInformationAll()
+				if (success === true) {
+					for (var i = 0; i < data.length; i++) {
+						const shipSelector = {}
+						shipSelector.value = data[i].id
+						shipSelector.text = data[i].shipName
+						this.shipName.push(shipSelector)
+					}
+				} else {
+					uni.showToast({
+						title: '出现错误，联系人员解决',
+						icon: 'error',
+						duration: 2000
+					})
+				}
 			}
+		},
+		created(){
+			this.shipBasicInformationAll1()
 		}
 	}
 </script>
@@ -209,5 +233,8 @@
 
 	.example-body {
 		margin-top: 3%;
+	}
+	.all {
+		margin-left: 3%;
 	}
 </style>

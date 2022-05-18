@@ -7,14 +7,8 @@
 	</page-meta>
 	<view class="all">
 		<view class="u-input">
-			<view class="username">
-				<view class="title">船舶名称</view>
-				<input class="uni-input" v-model="form.shipName" />
-			</view>
-			<view class="username">
-				<view class="title">航线</view>
-				<input class="uni-input" v-model="form.hangxian" />
-			</view>
+			<view class="text">船舶名称</view>
+			<uni-data-select :clear="true" v-model="form.shipId" :localdata="shipName"></uni-data-select>
 			<view class="text">业务类型</view>
 			<uni-data-select :clear="true" v-model="form.businessType" :localdata="businessType"></uni-data-select>
 			<view class="username">
@@ -47,11 +41,11 @@
 				<view class="title">早上9点船位</view>
 				<input class="uni-input" v-model="form.morningBerth" />
 			</view>
-				<view class="title">发航时间</view>
+			<view class="title">发航时间</view>
 			<view class="example-body">
 				<uni-datetime-picker type="datetime" v-model="form.departureTime" />
 			</view>
-				<view class="title">抵港时间</view>
+			<view class="title">抵港时间</view>
 			<view class="example-body">
 				<uni-datetime-picker type="datetime" v-model="form.arriveTime" />
 			</view>
@@ -73,7 +67,8 @@
 <script>
 	import {
 		shipDynamicsfindById,
-		shipDynamicsUpdate
+		shipDynamicsUpdate,
+		shipBasicInformationAll
 	} from '@/util/api.js'
 	export default {
 		data() {
@@ -95,7 +90,8 @@
 					averageSpeed: null,
 					averageShipSpeed: null,
 					note: '',
-					oilConsumption: ''
+					oilConsumption: '',
+					shioId: null
 				},
 				businessType: [{
 						value: 1,
@@ -122,7 +118,13 @@
 						value: 2,
 						text: '下水'
 					}
-				]
+				],
+				shipName: [],
+				shipSelector: {
+					value: null,
+					text: ''
+				},
+				arr: []
 			}
 		},
 		onLoad: function(option) {
@@ -154,8 +156,9 @@
 				this.form.businessType = data.businessType
 				this.form.voyageNumber = data.voyageNumber
 				this.form.course = data.course
-				this.form.hangxian = data.routes
+				this.form.airway = data.airway
 				this.form.id = data.id
+				this.form.shipId = data.shipId
 			},
 			async shipDynamicsUpdate1() {
 				const {
@@ -180,10 +183,35 @@
 						duration: 2000
 					})
 				}
+			},
+			async shipBasicInformationAll1() {
+				const {
+					data,
+					code,
+					message,
+					success
+				} = await shipBasicInformationAll()
+				if (success === true) {
+					for (var i = 0; i < data.length; i++) {
+						const shipSelector = {}
+						shipSelector.value = data[i].id
+						shipSelector.text = data[i].shipName
+						this.shipName.push(shipSelector)
+					}
+				} else {
+					uni.showToast({
+						title: '出现错误，联系人员解决',
+						icon: 'error',
+						duration: 2000
+					})
+				}
 			}
 
+
 		},
-		created() {}
+		created() {
+			this.shipBasicInformationAll1()
+		}
 	}
 </script>
 
@@ -237,6 +265,7 @@
 		overflow: hidden;
 		border: none;
 	}
+
 	.example-body {
 		margin-top: 3%;
 	}

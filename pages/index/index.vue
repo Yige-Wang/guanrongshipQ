@@ -39,7 +39,7 @@
 				array: [],
 				shipName: '',
 				page: 1,
-				limit: 10,
+				limit: 20,
 				total: 0,
 				shipDynamics: {
 
