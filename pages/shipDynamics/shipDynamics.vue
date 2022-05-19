@@ -34,6 +34,10 @@
 				<input class="uni-input" v-model="form.averageShipSpeed" />
 			</view>
 			<view class="username">
+				<view class="title">装载货物名称</view>
+				<input class="uni-input" v-model="form.nameOfDynamicallyLoadedCargo" />
+			</view>
+			<view class="username">
 				<view class="title">下午3点船位</view>
 				<input class="uni-input" v-model="form.afternoonBerth" />
 			</view>

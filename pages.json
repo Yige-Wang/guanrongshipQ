@@ -15,10 +15,10 @@
 
 		},
 		{
-			"path": "pages/test/test"
-		},
-		{
-			"path": "pages/index/index"
+			"path": "pages/index/index",
+			"style": {
+				
+			}
 			
 		},
 		{
@@ -26,6 +26,33 @@
 		}
         ,{
             "path" : "pages/shipDynamicsAdd/shipDynamicsAdd",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/shipBasic/shipBasic",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/shipBasicInformationAdd/shipBasicInformationAdd",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/shipBasicInformationDetail/shipBasicInformationDetail",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -52,12 +79,11 @@
 				"selectedIconPath": "static/logo.png"
 			},
 			{
-				"pagePath": "pages/test/test",
+				"pagePath": "pages/shipBasic/shipBasic",
 				"text": "船舶基本信息",
 				"iconPath": "./static/logo.png",
 				"selectedIconPath": "static/logo.png"
 			}
-
 		]
 	},
 	"condition": {

@@ -19,3 +19,6 @@ export function shipDynamicsAdd(params){
 export function shipBasicInformationAll(params){
 	return request("shipBasicInformation/findAll","GET",params);
 }
+export function shipBasicInformationList(params){
+	return request("shipBasicInformation/list","GET",params);
+}

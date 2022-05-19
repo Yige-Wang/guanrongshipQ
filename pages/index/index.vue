@@ -1,22 +1,58 @@
 <template>
 	<page-meta>
-		<navigation-bar title="冠荣船舶信息管理" title-icon="/static/logo.png" title-icon-radius="20px" subtitle-color="#000000"
+		<navigation-bar title="冠荣船舶动态信息" title-icon="/static/logo.png" title-icon-radius="20px" subtitle-color="#000000"
 			front-color="#000000" background-color="#ffffff" color-animation-timing-func="easeIn" title-align="auto" />
 	</page-meta>
-	<view class="content"></view>
-	<view class="content">
-		<uni-search-bar @input="shipDynamicsList1" @cancel="clear" v-model="shipName">
-		</uni-search-bar>
-		<uni-list v-for="(item,index) in array"  :key="index">
-			<uni-list-item :title='item.shipName' :clickable="true"  @click="toDetail(item.id)"
-				:note="item.route" :rightText="item.addTime"></uni-list-item>
-		</uni-list>
-		<uni-pagination :show-icon="true" :current="page" :total="total" :value="page" :pageSize="limit"
-			@change="change" title="标题文字" />
-	</view>
-	<view>
-		<uni-fab ref="fab" :pattern="pattern" horizontal="right" vertical="bottom" direction="horizontal"
-			@fabClick="fabClick" />
+	<view class="uni-container">
+			<uni-table ref="table" :loading="loading" border stripe type="selection" emptyText="暂无更多数据" @selection-change="selectionChange">
+				<uni-tr>
+					<uni-th width="150" align="center">船舶名称</uni-th>
+					<uni-th width="150" align="center">业务类型</uni-th>
+					<uni-th align="center">航次</uni-th>
+					<uni-th width="204" align="center">航向</uni-th>
+					<uni-th width="204" align="center">航线</uni-th>
+					<uni-th width="204" align="center">上午九点船位</uni-th>
+					<uni-th width="204" align="center">下午三点船位</uni-th>
+					<uni-th width="204" align="center">发航时间</uni-th>
+					<uni-th width="204" align="center">抵港时间</uni-th>
+					<uni-th width="204" align="center">装载货物名称</uni-th>
+					<uni-th width="204" align="center">吨位</uni-th>
+					<uni-th width="204" align="center">箱量</uni-th>
+					<uni-th width="204" align="center">主机平均转速</uni-th>
+					<uni-th width="204" align="center">平均航速</uni-th>
+					<uni-th width="204" align="center">备注</uni-th>
+					<uni-th width="204" align="center">添加时间</uni-th>
+					<uni-th width="204" align="center">设置</uni-th>
+				</uni-tr>
+				<uni-tr v-for="(item, index) in array" :key="index">
+					<uni-td align="center">{{ item.shipName }}</uni-td>
+					<uni-td align="center">
+						<view class="name">{{ item.businessType }}</view>
+					</uni-td align="center">
+					<uni-td align="center">{{ item.voyageNumber }}</uni-td>
+					<uni-td align="center">{{ item.course }}</uni-td>
+					<uni-td align="center">{{ item.airway }}</uni-td>
+					<uni-td align="center">{{ item.morningBerth }}</uni-td>
+					<uni-td align="center">{{ item.afternoonBerth }}</uni-td>
+					<uni-td align="center">{{ item.departureTime }}</uni-td>
+					<uni-td align="center">{{ item.arriveTime }}</uni-td>
+					<uni-td align="center">{{ item.nameOfDynamicallyLoadedCargo }}</uni-td>
+					<uni-td align="center">{{ item.tonnage }}</uni-td>
+					<uni-td align="center">{{ item.boxQuantity }}</uni-td>
+					<uni-td align="center">{{ item.averageSpeed }}</uni-td>
+					<uni-td align="center">{{ item.averageShipSpeed }}</uni-td>
+					<uni-td align="center">{{ item.note }}</uni-td>
+					<uni-td align="center">{{ item.addTime }}</uni-td>
+					<uni-td align="center">
+						<view class="uni-group">
+							<button class="uni-button" @click="toDetail(item.id)" size="mini" type="primary">修改</button>
+							<button class="uni-button" size="mini" type="warn">删除</button>
+						</view>
+					</uni-td>
+				</uni-tr>
+			</uni-table>
+			<view class="uni-pagination-box"><uni-pagination show-icon :page-size="limit" :current="page" :total="total" @change="change(e)" /></view>
+		</view>
 	</view>
 </template>
 <script>
@@ -33,13 +69,14 @@
 					total: 0,
 					list: []
 				},
+				loading:false,
 				code: '',
 				message: "",
 				success: false,
 				array: [],
 				shipName: '',
 				page: 1,
-				limit: 20,
+				limit: 12,
 				total: 0,
 				shipDynamics: {
 
@@ -52,9 +89,6 @@
 					iconColor: '#fff'
 				}
 			}
-		},
-		onLoad() {
-
 		},
 		methods: {
 			async shipDynamicsList1() {
@@ -111,7 +145,7 @@
 				this.total = data.total
 			}
 		},
-		created: function() {
+		onShow: function() {
 			this.shipDynamicsList1()
 		}
 	}
