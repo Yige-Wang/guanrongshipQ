@@ -1,5 +1,5 @@
 <template>
-	
+
 	<view class="img" style="width: 100%;height: 100%;opacity: 0.4;z-index: -1;">
 		<form v-model="form">
 			<view class="u-input">
@@ -12,9 +12,12 @@
 					<input class="uni-input" password type="text" placeholder="输入密码" v-model="form.password" />
 				</view>
 				<view class="submit">
-					<fui-button @click="loginSubmit" radius="96rpx">登录</fui-button>
+					<fui-button class='loginButoon' @click="loginSubmit" radius="96rpx">登录</fui-button>
+					<fui-button class='zhiwen' @click="startSoterAuthenticationFingerPrint" radius="96rpx">指纹认证
+					</fui-button>
 				</view>
 			</view>
+
 		</form>
 	</view>
 </template>
@@ -49,18 +52,79 @@
 					uni.showToast({
 						title: '登录成功',
 						duration: 2000,
-						icon:'success'
+						icon: 'success'
 					})
 					uni.reLaunch({
-						url:"../index/index",
-						})
+						url: "../index/index",
+					})
 				} else {
 					uni.showToast({
-						icon : '用户名或密码错误',
+						icon: '用户名或密码错误',
 						title: message,
 						duration: 2000
 					});
 				}
+			},
+			startSoterAuthenticationFingerPrint() {
+				var that = this
+				uni.startSoterAuthentication({
+					requestAuthModes: ['fingerPrint'],
+					authContent: '请用指纹解锁',
+					complete(res) {
+						if (res.errCode === 0) {
+							uni.showToast({
+								duration: 2000,
+								title: '正在进入页面',
+								icon: 'success'
+							})
+							that.form.username = 'daowei'
+							that.form.password = 'daowei'
+							that.loginSubmit()
+						} else if (res.errCode === 90001) {
+							uni.showToast({
+								duration: 2000,
+								title: '当前设备不支持指纹',
+								icon: 'error'
+							})
+						}else if (res.errCode === 90002) {
+							uni.showToast({
+								duration: 2000,
+								title: '未授权',
+								icon: 'error'
+							})
+						} else if (res.errCode === 90003) {
+							uni.showToast({
+								duration: 2000,
+								title: '不支持指纹解锁',
+								icon: 'error'
+							})
+						} else if (res.errCode === 90007) {
+							uni.showToast({
+								duration: 2000,
+								title: '内部错误',
+								icon: 'error'
+							})
+						} else if (res.errCode === 90009) {
+							uni.showToast({
+								duration: 2000,
+								title: '识别失败',
+								icon: 'error'
+							})
+						} else if (res.errCode === 90010) {
+							uni.showToast({
+								duration: 2000,
+								title: '失败次数过多',
+								icon: 'error'
+							})
+						} else if (res.errCode === 90011) {
+							uni.showToast({
+								duration: 2000,
+								title: '用户未录入所选识别方式',
+								icon: 'error'
+							})
+						}
+					}
+				})
 			}
 		}
 	}
@@ -103,5 +167,9 @@
 
 	.title {
 		font-size: ;
+	}
+
+	.zhiwen {
+		margin-top: 5%;
 	}
 </style>

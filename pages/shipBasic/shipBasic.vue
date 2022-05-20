@@ -1,37 +1,48 @@
 <template>
+	<page-meta>
+		<navigation-bar title="船舶基础信息" title-icon="/static/logo.png" title-icon-radius="20px" subtitle-color="#000000"
+			front-color="#000000" background-color="#ffffff" color-animation-timing-func="easeIn" title-align="auto" />
+	</page-meta>
+	<uni-search-bar @input="shipBasicInformationList1" @cancel="clear" v-model="shipName">
+			</uni-search-bar>
 	<view>
-			<view class="uni-container">
-				<uni-table ref="table" :loading="loading" border stripe type="selection" emptyText="暂无更多数据" @selection-change="selectionChange">
-					<uni-tr>
-						<uni-th width="150" align="center">船舶名称</uni-th>
-						<uni-th width="150" align="center">英文名称</uni-th>
-						<uni-th align="center">建造日期</uni-th>
-						<uni-th width="204" align="center">船舶类型</uni-th>
-						<uni-th width="204" align="center">设置</uni-th>
-					</uni-tr>
-					<uni-tr v-for="(item, index) in array" :key="index">
-						<uni-td align="center">{{ item.shipName }}</uni-td>
-						<uni-td align="center">
-							<view class="name">{{ item.shipeNameEn }}</view>
-						</uni-td align="center">
-						<uni-td align="center">{{ item.constructionDate }}</uni-td>
-						<uni-td align="center">{{ item.shipType }}</uni-td>
-						<uni-td align="center">
-							<view class="uni-group">
-								<button class="uni-button" size="mini" type="primary">修改</button>
-								<button class="uni-button" size="mini" type="warn">删除</button>
-							</view>
-						</uni-td>
-					</uni-tr>
-				</uni-table>
-				<view class="uni-pagination-box"><uni-pagination show-icon :page-size="limit" :current="page" :total="total" @change="change(e)" /></view>
+		<view class="uni-container">
+			<uni-table ref="table" :loading="loading" border emptyText="暂无更多数据">
+				<uni-tr>
+					<uni-th width="80" align="center">船舶名称</uni-th>
+					<uni-th width="100" align="center">英文名称</uni-th>
+					<uni-th align="center" width="120">建造日期</uni-th>
+					<uni-th width="100" align="center">船舶类型</uni-th>
+					<uni-th width="240" align="center">设置</uni-th>
+				</uni-tr>
+				<uni-tr v-for="(item, index) in array" :key="index">
+					<uni-td align="center">{{ item.shipName }}</uni-td>
+					<uni-td align="center">
+						<view class="name">{{ item.shipeNameEn }}</view>
+					</uni-td align="center">
+					<uni-td align="center">{{ item.constructionDate }}</uni-td>
+					<uni-td align="center">{{ item.shipType }}</uni-td>
+					<uni-td align="center">
+						<view class="uni-group">
+							<button class="uni-button" @click="toDetail(item.id)" size="mini" type="primary">修改</button>
+							<button class="uni-button" size="mini" type="warn">删除</button>
+							<button class="uni-button" size="mini" type="primary">查看证书</button>
+						</view>
+					</uni-td>
+				</uni-tr>
+			</uni-table>
+			<view class="uni-pagination-box">
+				<uni-pagination show-icon :page-size="limit" :current="page" :total="total" @change="change(e)" />
 			</view>
 		</view>
+		<uni-fab ref="fab" :pattern="pattern" horizontal="right" vertical="bottom" @fabClick="fabClick" />
+	</view>
 </template>
 
 <script>
 	import {
-		shipBasicInformationList
+		shipBasicInformationList,
+		shipBasicInformationFindById
 	} from '@/util/api.js'
 	export default {
 		data() {
@@ -49,9 +60,9 @@
 				array: [],
 				shipName: '',
 				page: 1,
-				limit: 20,
+				limit: 12,
 				total: 0,
-				loading:false,
+				loading: false,
 				shipDynamics: {
 
 				},
@@ -83,7 +94,7 @@
 			},
 			toDetail(id) {
 				uni.navigateTo({
-					url: '/pages/shipBasicInformationAdd/shipBasicInformationAdd?id=' + id,
+					url: '/pages/shipBasicInformationDetail/shipBasicInformationDetail?id=' + id,
 
 				})
 			},
@@ -113,7 +124,7 @@
 				this.total = data.total
 			}
 		},
-		created() {
+		onShow() {
 			this.shipBasicInformationList1()
 		}
 	}

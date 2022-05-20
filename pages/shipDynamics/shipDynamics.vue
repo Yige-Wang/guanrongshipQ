@@ -1,7 +1,7 @@
 <template>
 
 	<page-meta>
-		<navigation-bar title="船舶动态信息详情" title-icon="/static/logo.png" title-icon-radius="20px" subtitle-color="#000000"
+		<navigation-bar title="船舶动态信息修改" title-icon="/static/logo.png" title-icon-radius="20px" subtitle-color="#000000"
 			front-color="#000000" background-color="#ffffff" color-animation-timing-func="easeIn"
 			title-align="center" />
 	</page-meta>

@@ -22,3 +22,9 @@ export function shipBasicInformationAll(params){
 export function shipBasicInformationList(params){
 	return request("shipBasicInformation/list","GET",params);
 }
+export function shipDynamicsDelete(params){
+	return request("shipDynamics/delete","GET",params);
+}
+export function shipBasicInformationFindById(params){
+	return request("/shipBasicInformation/findById","GET",params);
+}
