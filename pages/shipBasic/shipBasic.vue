@@ -25,8 +25,9 @@
 					<uni-td align="center">
 						<view class="uni-group">
 							<button class="uni-button" @click="toDetail(item.id)" size="mini" type="primary">修改</button>
-							<button class="uni-button" size="mini" type="warn">删除</button>
+							<button class="uni-button" size="mini" @click="deleteModel(item.id)" type="warn">删除</button>
 							<button class="uni-button" size="mini" type="primary">查看证书</button>
+							<button class="uni-button" @click="locationBaidu(item.id)" size="mini" type="primary">船舶位置</button>
 						</view>
 					</uni-td>
 				</uni-tr>
@@ -42,7 +43,8 @@
 <script>
 	import {
 		shipBasicInformationList,
-		shipBasicInformationFindById
+		shipBasicInformationFindById,
+		shipBasicDelete
 	} from '@/util/api.js'
 	export default {
 		data() {
@@ -105,6 +107,42 @@
 			},
 			clear() {
 				this.shipName === ''
+			},
+			locationBaidu(id){
+				uni.navigateTo({
+					url:"/pages/baiduLocation/baiduLocation?id="+id
+				})
+			},
+			async shipBasicDelete1(id){
+				const {code,data,message,success} = await  shipBasicDelete({id :id})
+				if(success===true){
+					uni.showToast({
+						icon:'success',
+						duration:2000,
+						title:'删除成功'
+					})
+					this.shipBasicInformationList1()
+				}else{
+					uni.showToast({
+						icon:'success',
+						duration:2000,
+						title:'联系开发人员处理'
+					})
+				}
+			},
+			deleteModel(id){
+				var that = this
+				uni.showModal({
+					title:'提示',
+					content:'是否删除该记录',
+					success: function(res) {
+					    if (res.confirm) {
+					        that.shipBasicDelete1(id)
+					    } else if (res.cancel) {
+					        return
+					    }
+					}
+				})
 			},
 			async change(e) {
 				this.page = e.current

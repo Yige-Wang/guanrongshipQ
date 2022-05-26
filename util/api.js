@@ -28,3 +28,30 @@ export function shipDynamicsDelete(params){
 export function shipBasicInformationFindById(params){
 	return request("/shipBasicInformation/findById","GET",params);
 }
+export function getLocation(params){
+	return request("/shipBasicInformation/getLocation","GET",params);
+}
+export function shipBasicInformationUpdate(params){
+	return request("/shipBasicInformation/update","POST",params);
+}
+export function shipBasicInformationAdd(params){
+	return request("/shipBasicInformation/creat","POST",params);
+}
+export function shipBasicDelete(params){
+	return request("/shipBasicInformation/delete","GET",params);
+}
+export function crewList(params){
+	return request("/crew/list","GET",params);
+}
+export function crewFindById(params){
+	return request("/crew/findById","GET",params);
+}
+export function crewUpdate(params){
+	return request("/crew/update","POST",params);
+}
+export function crewAdd(params){
+	return request("/crew/create","POST",params);
+}
+export function crewDelete(params){
+	return request("/crew/delete","GET",params);
+}

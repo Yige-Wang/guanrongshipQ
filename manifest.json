@@ -18,7 +18,9 @@
         },
         /* 模块配置 */
         "modules" : {
-            "Fingerprint" : {}
+            "Fingerprint" : {},
+            "Maps" : {},
+            "Geolocation" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -48,7 +50,19 @@
             /* SDK配置 */
             "sdkConfigs" : {
                 "ad" : {},
-                "maps" : {}
+                "maps" : {
+                    "baidu" : {
+                        "appkey_ios" : "",
+                        "appkey_android" : "PkO9jdCtfsVDwssHXf45s52Npe7cGXtp"
+                    }
+                },
+                "geolocation" : {
+                    "baidu" : {
+                        "__platform__" : [ "android" ],
+                        "appkey_ios" : "",
+                        "appkey_android" : "PkO9jdCtfsVDwssHXf45s52Npe7cGXtp"
+                    }
+                }
             },
             "splashscreen" : {
                 "androidStyle" : "default"

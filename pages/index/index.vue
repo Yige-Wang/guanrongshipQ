@@ -137,6 +137,42 @@
 				});
 			},
 			async deleteById(id) {
+				var that = this
+				uni.showModal({
+					title: '提示',
+					content: '是否删除该记录',
+					success: function(res) {
+					    if (res.confirm) {
+					        that.deleteitem(id)
+					    } else if (res.cancel) {
+					        return
+					    }
+					}
+				});
+				
+			},
+			clear() {
+				this.shipName === ''
+			},
+			async change(e) {
+				this.page = e.current
+				const {
+					data,
+					code,
+					message,
+					success
+				} = await shipDynamicsList({
+					shipName: this.shipName,
+					page: this.page,
+					limit: this.limit
+				})
+				this.array = data.list
+				this.page = data.page
+				this.limit = data.limit
+				this.total = data.total
+				console.log(this.array)
+			},
+			async deleteitem(id){
 				const {
 					code,
 					data,
@@ -160,27 +196,6 @@
 					})
 					this.shipDynamicsList1()
 				}
-			},
-			clear() {
-				this.shipName === ''
-			},
-			async change(e) {
-				this.page = e.current
-				const {
-					data,
-					code,
-					message,
-					success
-				} = await shipDynamicsList({
-					shipName: this.shipName,
-					page: this.page,
-					limit: this.limit
-				})
-				this.array = data.list
-				this.page = data.page
-				this.limit = data.limit
-				this.total = data.total
-				console.log(this.array)
 			}
 		},
 		onShow: function() {

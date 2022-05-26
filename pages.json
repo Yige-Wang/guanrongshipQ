@@ -60,6 +60,42 @@
             }
             
         }
+        ,{
+            "path" : "pages/baiduLocation/baiduLocation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/crew/crew",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/crewDetail/crewDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/crewAdd/crewAdd",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -81,6 +117,12 @@
 			{
 				"pagePath": "pages/shipBasic/shipBasic",
 				"text": "船舶基本信息",
+				"iconPath": "./static/logo.png",
+				"selectedIconPath": "static/logo.png"
+			},
+			{
+				"pagePath": "pages/crew/crew",
+				"text": "船员基本信息",
 				"iconPath": "./static/logo.png",
 				"selectedIconPath": "static/logo.png"
 			}
